@@ -1,4 +1,5 @@
 FROM nginx:alpine
+RUN apk update && apk upgrade --no-cache
 
 LABEL maintainer="Meghana Sahithi"
 LABEL description="Nexvion E-Commerce Static Website"
