@@ -16,6 +16,13 @@ pipeline {
             }
         }
 
+        stage('Security Scan') {
+            steps {
+                bat '"C:\\Users\\SUPRIYA\\AppData\\Local\\Microsoft\\WinGet\\Packages\\AquaSecurity.Trivy_Microsoft.Winget.Source_8wekyb3d8bbwe\\trivy.exe" image --no-progress --exit-code 1 --severity HIGH,CRITICAL %DOCKER_USER%/%IMAGE_NAME%:%BUILD_NUMBER%'
+            }
+        }
+
+
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
