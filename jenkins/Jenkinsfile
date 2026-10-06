@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+
+    
+    environment {
+        APP_NAME = 'Nexvion'
+        IMAGE_NAME = 'nexvion'
+        IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+
+    stages {
+       
+
+       stage('Checkout') {
+           steps {
+               echo 'Checking out Nexvion source code...'
+               checkout scm
+           }
+       }
+       
+       stage('Validate') {
+           steps {
+               echo 'Validating Nexvion project files...'
+               sh '''
+                  test -f index.html
+                  test -f products.html
+                    test -f payment.html
+                    test -f Dockerfile
+                    test -f compose.yaml
+                    echo "Project validation successful."
+                '''
+            }
+        }
+
+
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Nexvion Docker image...'
+                sh '''
+                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                '''
+            }
+         }
+
+         stage('Container Verification') {
+            steps {
+                echo 'Verifying Docker image...'
+                sh '''
+                    docker image inspect ${IMAGE_NAME}:${IMAGE_TAG} > /dev/null
+                    echo "Docker image verification successful."
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Nexvion CI pipeline completed successfully.'
+        }
+
+        failure {
+            echo 'Nexvion CI pipeline failed.'
+        }
+    }
+}   
