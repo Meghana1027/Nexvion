@@ -1,0 +1,24 @@
+---
+- name: Configure Nexvion application
+  hosts: local
+  become: false
+
+  tasks:
+    - name: Create Nexvion configuration directory
+      ansible.builtin.file:
+        path: /tmp/nexvion-config
+        state: directory
+        mode: '0755'
+
+    - name: Create Nexvion configuration file
+      ansible.builtin.copy:
+        dest: /tmp/nexvion-config/app.conf
+        content: |
+          Application=Nexvion
+          Environment=Kubernetes
+          Namespace=nexvion
+          Replicas=2
+          ContainerPort=80
+          ServiceType=NodePort
+          NodePort=30080
+        mode: '0644'

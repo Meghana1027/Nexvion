@@ -1,0 +1,11 @@
+Nexvion DevOps Capstone
+========================
+Application: Nexvion
+Environment: Kubernetes
+Namespace: nexvion
+Replicas: 2
+Container Port: 80
+Service Type: NodePort
+NodePort: 30080
+Docker Image: meghanas12345/nexvion:4
+Managed By: Terraform
