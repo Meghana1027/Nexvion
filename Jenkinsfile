@@ -31,7 +31,8 @@ pipeline {
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
                     bat '''
-                        echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin || exit /b 1
+                        powershell -NoProfile -Command "$env:DOCKER_PASSWORD | docker login -u $env:DOCKER_USERNAME --password-stdin"
+                        if errorlevel 1 exit /b 1
                         docker push %DOCKER_USER%/%IMAGE_NAME%:%BUILD_NUMBER% || exit /b 1
                         docker logout
                     '''
