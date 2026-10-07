@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-nexvion
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: nexvion
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: nexvion
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.rollingUpdate.maxUnavailable }}
+      maxSurge: {{ .Values.rollingUpdate.maxSurge }}
+
+  template:
+    metadata:
+      labels:
+        app: nexvion
+
+    spec:
+      containers:
+        - name: nexvion
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - containerPort: 80
+              protocol: TCP
+
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: {{ .Values.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+
+          volumeMounts:
+            - name: nexvion-config
+              mountPath: /etc/nexvion/config
+              readOnly: true
+
+            - name: nexvion-secret
+              mountPath: /etc/nexvion/secret
+              readOnly: true
+
+      volumes:
+        - name: nexvion-config
+          configMap:
+            name: {{ .Release.Name }}-nexvion-config
+
+        - name: nexvion-secret
+          secret:
+            secretName: {{ .Release.Name }}-nexvion-secret

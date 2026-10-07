@@ -1,0 +1,112 @@
+========================================
+ Nexvion AI-Assisted Incident Analysis
+========================================
+Date: Wed Oct  7 11:03:43 UTC 2026
+Namespace: nexvion
+
+### POD STATUS ###
+NAME                                    READY   STATUS    RESTARTS       AGE     IP             NODE       NOMINATED NODE   READINESS GATES
+nexvion-7b5b7bffb8-cw96w                1/1     Running   2 (22m ago)    5h13m   10.244.0.130   minikube   <none>           <none>
+nexvion-7b5b7bffb8-wj74z                1/1     Running   0              22m     10.244.0.164   minikube   <none>           <none>
+nexvion-helm-nexvion-6485bbb558-nghg7   1/1     Running   1 (106m ago)   5h1m    10.244.0.132   minikube   <none>           <none>
+nexvion-helm-nexvion-6485bbb558-wcjxg   0/1     Running   1 (106m ago)   5h1m    10.244.0.131   minikube   <none>           <none>
+
+### DEPLOYMENT STATUS ###
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                     SELECTOR
+nexvion                2/2     2            2           18h    nexvion      meghanas12345/nexvion:13   app=nexvion
+nexvion-helm-nexvion   1/2     2            1           5h1m   nexvion      meghanas12345/nexvion:13   app=nexvion
+
+### SERVICE STATUS ###
+NAME                           TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+nexvion-helm-nexvion-service   NodePort   10.96.75.225   <none>        80:30081/TCP   5h1m
+nexvion-service                NodePort   10.100.18.69   <none>        80:30080/TCP   18h
+
+### RECENT EVENTS ###
+22m         Normal    Killing                        pod/nexvion-7b5b7bffb8-cw96w                Container nexvion failed liveness probe, will be restarted
+22m         Normal    Pulling                        pod/nexvion-7b5b7bffb8-cw96w                Pulling image "meghanas12345/nexvion:13"
+22m         Normal    Created                        pod/nexvion-7b5b7bffb8-cw96w                Container created
+22m         Normal    Pulled                         pod/nexvion-7b5b7bffb8-cw96w                Successfully pulled image "meghanas12345/nexvion:13" in 9.532s (9.533s including waiting). Image size: 74448136 bytes.
+22m         Normal    Started                        pod/nexvion-7b5b7bffb8-cw96w                Container started
+22m         Normal    Killing                        pod/nexvion-7b5b7bffb8-qcr2l                Stopping container nexvion
+22m         Normal    SuccessfulCreate               replicaset/nexvion-7b5b7bffb8               Created pod: nexvion-7b5b7bffb8-wj74z
+21m         Normal    Pulling                        pod/nexvion-7b5b7bffb8-wj74z                Pulling image "meghanas12345/nexvion:13"
+21m         Normal    Pulled                         pod/nexvion-7b5b7bffb8-wj74z                Successfully pulled image "meghanas12345/nexvion:13" in 2.715s (8.115s including waiting). Image size: 74448136 bytes.
+21m         Normal    Created                        pod/nexvion-7b5b7bffb8-wj74z                Container created
+21m         Normal    Started                        pod/nexvion-7b5b7bffb8-wj74z                Container started
+21m         Normal    Sync                           ingress/nexvion-ingress                     Scheduled for sync
+14m         Warning   Unhealthy                      pod/nexvion-helm-nexvion-6485bbb558-nghg7   Liveness probe failed: Get "http://10.244.0.132:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+12m         Warning   Unhealthy                      pod/nexvion-helm-nexvion-6485bbb558-wcjxg   Liveness probe failed: Get "http://10.244.0.131:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+10m         Warning   Unhealthy                      pod/nexvion-helm-nexvion-6485bbb558-wcjxg   Liveness probe errored and resulted in failure state: context deadline exceeded (Client.Timeout or context cancellation while reading body)
+10m         Warning   Unhealthy                      pod/nexvion-7b5b7bffb8-cw96w                Liveness probe failed: Get "http://10.244.0.130:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+9m19s       Warning   Unhealthy                      pod/nexvion-7b5b7bffb8-cw96w                Readiness probe failed: Get "http://10.244.0.130:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+9m13s       Warning   Unhealthy                      pod/nexvion-helm-nexvion-6485bbb558-wcjxg   Readiness probe errored and resulted in failure state: context deadline exceeded (Client.Timeout or context cancellation while reading body)
+8m49s       Warning   Unhealthy                      pod/nexvion-helm-nexvion-6485bbb558-nghg7   Readiness probe failed: Get "http://10.244.0.132:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+8m9s        Warning   Unhealthy                      pod/nexvion-7b5b7bffb8-wj74z                Liveness probe errored and resulted in failure state: context deadline exceeded (Client.Timeout or context cancellation while reading body)
+5m18s       Warning   Unhealthy                      pod/nexvion-7b5b7bffb8-wj74z                Readiness probe failed: Get "http://10.244.0.164:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+4m49s       Warning   Unhealthy                      pod/nexvion-7b5b7bffb8-wj74z                Liveness probe failed: Get "http://10.244.0.164:80/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+4m1s        Warning   NodeNotReady                   pod/nexvion-7b5b7bffb8-cw96w                Node is not ready
+3m14s       Warning   NodeNotReady                   pod/nexvion-helm-nexvion-6485bbb558-wcjxg   Node is not ready
+3m9s        Normal    Sync                           ingress/nexvion-ingress                     Scheduled for sync
+2m26s       Warning   NodeNotReady                   pod/nexvion-7b5b7bffb8-wj74z                Node is not ready
+113s        Normal    TaintManagerEviction           pod/nexvion-helm-nexvion-6485bbb558-wcjxg   Cancelling deletion of Pod nexvion/nexvion-helm-nexvion-6485bbb558-wcjxg
+113s        Normal    TaintManagerEviction           pod/nexvion-helm-nexvion-6485bbb558-nghg7   Cancelling deletion of Pod nexvion/nexvion-helm-nexvion-6485bbb558-nghg7
+113s        Normal    TaintManagerEviction           pod/nexvion-7b5b7bffb8-cw96w                Cancelling deletion of Pod nexvion/nexvion-7b5b7bffb8-cw96w
+113s        Normal    TaintManagerEviction           pod/nexvion-7b5b7bffb8-wj74z                Cancelling deletion of Pod nexvion/nexvion-7b5b7bffb8-wj74z
+
+### APPLICATION LOGS ###
+Found 4 pods, using pod/nexvion-7b5b7bffb8-cw96w
+10.244.0.1 - - [07/Oct/2026:11:01:26 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:31 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:32 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:36 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:38 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:42 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:46 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:52 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:53 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:01:56 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:02 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:05 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:08 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:12 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:14 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:17 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:22 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:23 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:27 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:30 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:32 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:33 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:37 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:43 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:43 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:47 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:52 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:02:54 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:03 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:05 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:07 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:13 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:14 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:23 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:24 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:28 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:33 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:34 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:38 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:43 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:44 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:48 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:53 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:54 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:03:58 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:04:03 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:04:05 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:04:09 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:04:13 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+10.244.0.1 - - [07/Oct/2026:11:04:14 +0000] "GET / HTTP/1.1" 200 11710 "-" "kube-probe/1.35" "-"
+
+========================================
+ Incident evidence collected.
+ Report file: nexvion-incident-2026-10-07_11-03-43.txt
+========================================

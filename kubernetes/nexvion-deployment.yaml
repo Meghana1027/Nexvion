@@ -5,27 +5,53 @@ metadata:
   namespace: nexvion
   labels:
     app: nexvion
+
 spec:
   replicas: 2
+
+  selector:
+    matchLabels:
+      app: nexvion
+
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
-  selector:
-    matchLabels:
-      app: nexvion
+
   template:
     metadata:
       labels:
         app: nexvion
+
     spec:
       containers:
         - name: nexvion
-          image: meghanas12345/nexvion:4
+          image: meghanas12345/nexvion:13
           imagePullPolicy: Always
+
           ports:
             - containerPort: 80
+              protocol: TCP
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            failureThreshold: 3
+
           resources:
             requests:
               cpu: 100m
@@ -33,15 +59,21 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 5
+
+          volumeMounts:
+            - name: nexvion-config
+              mountPath: /etc/nexvion/config
+              readOnly: true
+
+            - name: nexvion-secret
+              mountPath: /etc/nexvion/secret
+              readOnly: true
+
+      volumes:
+        - name: nexvion-config
+          configMap:
+            name: nexvion-config
+
+        - name: nexvion-secret
+          secret:
+            secretName: nexvion-secret

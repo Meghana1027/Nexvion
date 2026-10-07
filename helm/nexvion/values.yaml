@@ -1,0 +1,44 @@
+replicaCount: 2
+
+image:
+  repository: meghanas12345/nexvion
+  tag: "13"
+  pullPolicy: Always
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 30080
+
+config:
+  appEnv: production
+  appName: Nexvion
+  appVersion: "13"
+
+secret:
+  demoSecret: devops-demo-secret
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+rollingUpdate:
+  maxUnavailable: 0
+  maxSurge: 1
+
+livenessProbe:
+  path: /
+  port: 80
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  path: /
+  port: 80
+  initialDelaySeconds: 5
+  periodSeconds: 5
