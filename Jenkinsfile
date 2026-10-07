@@ -22,7 +22,6 @@ pipeline {
             }
         }
 
-
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
@@ -51,7 +50,10 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                bat 'curl.exe -I http://localhost:%HOST_PORT%'
+                bat '''
+                    timeout /t 5 /nobreak >nul
+                    curl.exe -I --retry 5 --retry-delay 2 http://localhost:%HOST_PORT%
+                '''
             }
         }
     }
@@ -66,3 +68,4 @@ pipeline {
         }
     }
 }
+
