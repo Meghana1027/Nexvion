@@ -51,8 +51,8 @@ pipeline {
         stage('Health Check') {
             steps {
                 bat '''
-                    timeout /t 5 /nobreak >nul
-                    curl.exe -I --retry 5 --retry-delay 2 http://localhost:%HOST_PORT%
+                    powershell -NoProfile -Command "Start-Sleep -Seconds 5"
+                    curl.exe -I --retry 5 --retry-delay 2 --retry-all-errors http://localhost:%HOST_PORT%
                 '''
             }
         }
@@ -68,4 +68,3 @@ pipeline {
         }
     }
 }
-
